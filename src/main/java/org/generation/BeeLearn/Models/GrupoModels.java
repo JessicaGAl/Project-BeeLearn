@@ -1,4 +1,4 @@
-package org.generation.BeeLearn.Models;
+package org.generation.BeeLearn.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
