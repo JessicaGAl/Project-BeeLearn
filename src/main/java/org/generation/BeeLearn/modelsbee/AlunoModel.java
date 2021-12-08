@@ -1,4 +1,4 @@
-package org.generation.BeeLearn.models;
+package org.generation.BeeLearn.modelsbee;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
