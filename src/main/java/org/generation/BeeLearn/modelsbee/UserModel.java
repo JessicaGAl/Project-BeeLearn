@@ -33,16 +33,16 @@ import javax.validation.constraints.Size;
 	public class UserModel {
 		 
 		
-		private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) int id_usuario;		
+		private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id_usuario;		
 		private @NotBlank @Size (min = 3, max = 50)  String nome;
 		private @Size (min = 5, max = 100) @Email String email;
 		private @Size (min = 5, max = 45) @NotBlank  String senha;
 		
 		
-		public int getId_usuario() {
+		public Long getId_usuario() {
 			return id_usuario;
 		}
-		public void setId_usuario(int id_usuario) {
+		public void setId_usuario(Long id_usuario) {
 			this.id_usuario = id_usuario;
 		}
 		
