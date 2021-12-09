@@ -50,8 +50,8 @@ public class UserModel {
 		return idUsuario;
 	}
 
-	public void setId_usuario(Long id_usuario) {
-		this.idUsuario = id_usuario;
+	public void setId_usuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {
