@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tbl_instrutor")
 
 public class InstrutorModel {
-
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 	private @NotBlank String urlInstrutor;
 	private @NotBlank String tituloInstrutor;

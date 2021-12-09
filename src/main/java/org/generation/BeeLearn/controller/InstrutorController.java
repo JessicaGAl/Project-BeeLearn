@@ -40,4 +40,5 @@ public class InstrutorController {
 		return repo.findAllByTituloInstrutorContainingIgnoreCase(titulo);
 	}	
 
+	
 }

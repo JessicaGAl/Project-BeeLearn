@@ -11,4 +11,5 @@ public interface InstrutorRepository extends JpaRepository<InstrutorModel, Long>
 	
 	public List<InstrutorModel> findAllByTituloInstrutorContainingIgnoreCase(String tituloInstrutor);
 	
+	
 }
