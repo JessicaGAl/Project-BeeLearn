@@ -34,28 +34,12 @@ public class InstrutorModel {
 	@JsonIgnoreProperties("InstrutorModel")
 	private List<GrupoModels> grupo = new ArrayList<>();
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public UserModel getUserIns() {
-		return userIns;
-	}
-
-	public void setUserIns(UserModel userIns) {
-		this.userIns = userIns;
-	}
-
-	public List<GrupoModels> getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(List<GrupoModels> grupo) {
-		this.grupo = grupo;
 	}
 
 	public String getUrlInstrutor() {
@@ -98,9 +82,22 @@ public class InstrutorModel {
 		this.xpInstrutor = xpInstrutor;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-
+	public UserModel getUserIns() {
+		return userIns;
 	}
+
+	public void setUserIns(UserModel userIns) {
+		this.userIns = userIns;
+	}
+
+	public List<GrupoModels> getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(List<GrupoModels> grupo) {
+		this.grupo = grupo;
+	}
+
+
 
 }
