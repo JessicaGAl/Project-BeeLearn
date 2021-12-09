@@ -59,9 +59,5 @@ public class UserController {
 		return repository;
 	}
 
-	public void setRepository(UserRepository repository) {
-		this.repository = repository;
-	}
-
 
 }
