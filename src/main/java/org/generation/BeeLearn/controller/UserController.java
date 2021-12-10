@@ -33,9 +33,9 @@ public class UserController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 	
-	@GetMapping("/{id_usuario}")
-	public ResponseEntity <UserModel> GetById (@PathVariable Long id_usuario){
-		return repository.findById(id_usuario)
+	@GetMapping("/{idUsuario}")
+	public ResponseEntity <UserModel> GetById (@PathVariable Long idUsuario){
+		return repository.findById(idUsuario)
 				.map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -50,9 +50,9 @@ public class UserController {
 		return ResponseEntity.status (HttpStatus.OK).body(repository.save(edituser));
 	}
 	
-	@DeleteMapping("/{id_usuario}")
-	public void delete (@PathVariable long id_usuario) {
-		repository.deleteById(id_usuario);
+	@DeleteMapping("/{idUsuario}")
+	public void delete (@PathVariable Long idUsuario) {
+		repository.deleteById(idUsuario);
 	}
 
 	public UserRepository getRepository() {

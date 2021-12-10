@@ -30,10 +30,6 @@ public class PostagensModel {
 	private String postagem;
 	
 
-	public Long getIdPostagem() {
-		return idPostagem;
-	}
-
 	public void setIdPostagem(Long idPostagem) {
 		this.idPostagem = idPostagem;
 	}
@@ -61,6 +57,8 @@ public class PostagensModel {
 	public void setPostagem(String postagem) {
 		this.postagem = postagem;
 	}
+
+
 	
 	
 	
