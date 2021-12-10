@@ -34,7 +34,7 @@ public class UserModel {
 	private @Size(min = 5, max = 100) @Email String email;
 	private @Size(min = 5, max = 45) @NotBlank String senha;
 	private @Size(min = 5, max = 45) @NotBlank String bio;
-	private @Size(min = 5, max =200) @NotBlank String urlAvatar;
+	private String urlAvatar;
 	private @NotNull Long nivel;
 	private @NotNull Long xp;
 	
