@@ -26,21 +26,15 @@ public class GrupoModels {
 	private @NotBlank String descricao;
 	private @NotBlank String urlImagem;
 	
-	@ManyToOne
-	@JsonIgnoreProperties("GrupoModels")
-	@JoinColumn(name = "id_instrutor")
-	private InstrutorModel instrutor;
 	
+
+	private UserModel usuario;
+
 	@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("GrupoModels")
 	private List<PostagensModel> postagem = new ArrayList<>();
 
 	
-	
-	
-
-	
-
 	public Long getIdGrupo() {
 		return idGrupo;
 	}
@@ -73,14 +67,11 @@ public class GrupoModels {
 		this.urlImagem = urlImagem;
 	}
 
-	public InstrutorModel getInstrutor() {
-		return instrutor;
+	public UserModel getInstrutor() {
+		return usuario;
 	}
 
-	public void setInstrutor(InstrutorModel instrutor) {
-		this.instrutor = instrutor;
-	}
-
+	
 	public List<PostagensModel> getPostagem() {
 		return postagem;
 	}
