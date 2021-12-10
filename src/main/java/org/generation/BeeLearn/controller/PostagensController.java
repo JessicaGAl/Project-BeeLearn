@@ -45,8 +45,8 @@ public class PostagensController {
 	}
 
 	/** findByIDPostagem */
-	@GetMapping("/{id}")
-	public ResponseEntity<PostagensModel> findById(@PathVariable(value = "id") Long id) {
+	@GetMapping("/{idPostagem}")
+	public ResponseEntity<PostagensModel> findById(@PathVariable(value = "idPostagem") Long id) {
 		Optional<PostagensModel> optional = repository.findById(id);
 
 		if (optional.isPresent()) {
@@ -69,8 +69,8 @@ public class PostagensController {
 	}
 
 	/** deletePostagem */
-	@DeleteMapping("delete/{id}")
-	public void delete(@PathVariable(value = "id") Long id) {
+	@DeleteMapping("delete/{idPostagem}")
+	public void delete(@PathVariable(value = "idPostagem") Long id) {
 		repository.deleteById(id);
 	}
 
