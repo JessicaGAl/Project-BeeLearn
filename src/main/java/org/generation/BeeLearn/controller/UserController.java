@@ -34,12 +34,18 @@ public class UserController {
 	}
 	
 	@GetMapping("/{idUsuario}")
-	public ResponseEntity <UserModel> GetById (@PathVariable Long idUsuario){
+	public ResponseEntity <UserModel> GetById (@PathVariable(value = "idUsuario")Long idUsuario){
 		return repository.findById(idUsuario)
 				.map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
+	@GetMapping("/nomeUsuario/{nomeUsuario}")
+	public ResponseEntity<List<UserModel>> GetByName(@PathVariable(value = "nomeUsuario") @RequestBody String nomeUsuario) {
+		return ResponseEntity.ok(repository.findAllByNomeUsuarioContainingIgnoreCase(nomeUsuario));
+	}
+	
+		
 	@PostMapping
 	public ResponseEntity<UserModel> post (@Valid @RequestBody UserModel newuser){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(newuser));

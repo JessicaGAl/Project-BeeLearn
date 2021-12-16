@@ -1,18 +1,21 @@
 package org.generation.BeeLearn.modelsbee;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Biblioteca e Método @Entity utlizado para info e persistêcia no banco de
@@ -34,56 +37,80 @@ import javax.validation.constraints.Size;
 public class UserModel {
 
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idUsuario;
-	private @NotBlank @Size(min = 3, max = 50) String nome;
+	private @Size(min = 3, max = 50) String nomeUsuario;
 	private @Size(min = 5, max = 100) @Email String email;
 	private @Size(min = 5, max = 45) @NotBlank String senha;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_aluno", referencedColumnName = "id", foreignKey = @ForeignKey(name="FK_usuario_aluno"))
-	AlunoModel aluno;
+	private @Size(min = 5, max = 45) @NotBlank String bio;
+	private String urlAvatar;
+	private @NotNull Long nivel;
+	private @NotNull Long xp;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_instrutor", referencedColumnName = "id", foreignKey = @ForeignKey(name="FK_usuario_instrutor"))
-	InstrutorModel instrutor;
-
-	public Long getId_usuario() {
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("UserModels")
+	private List<UserModel> user = new ArrayList<>();
+	
+	
+	
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
-
-	public void setId_usuario(Long idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-
-	public String getNome() {
-		return nome;
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	public AlunoModel getAluno() {
-		return aluno;
+	public String getBio() {
+		return bio;
 	}
-
-	public void setAluno(AlunoModel aluno) {
-		this.aluno = aluno;
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
-
+	public String getUrlAvatar() {
+		return urlAvatar;
+	}
+	public void setUrlAvatar(String urlAvatar) {
+		this.urlAvatar = urlAvatar;
+	}
+	public Long getNivel() {
+		return nivel;
+	}
+	public void setNivel(Long nivel) {
+		this.nivel = nivel;
+	}
+	public Long getXp() {
+		return xp;
+	}
+	public void setXp(Long xp) {
+		this.xp = xp;
+	}
+	public List<UserModel> getUser() {
+		return user;
+	}
+	public void setUser(List<UserModel> user) {
+		this.user = user;
+	}
+	
+	
+	
+	
+	
 }
+	
+	
+	
