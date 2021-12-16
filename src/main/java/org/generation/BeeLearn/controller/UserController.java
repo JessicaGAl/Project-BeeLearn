@@ -18,52 +18,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*" )
-@RequestMapping("/user")
-
+@RequestMapping("/api/v1/user")
+@CrossOrigin(allowedHeaders = "*", origins = "*")
 public class UserController {
-	
-	@Autowired
-	private UserRepository repository;
-	
-	@GetMapping
-	public ResponseEntity<List<UserModel>>GetAll(){
-		return ResponseEntity.ok(repository.findAll());
-	}
-	
-	@GetMapping("/{idUsuario}")
-	public ResponseEntity <UserModel> GetById (@PathVariable(value = "idUsuario")Long idUsuario){
-		return repository.findById(idUsuario)
-				.map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.notFound().build());
-	}
-	
-	@GetMapping("/nomeUsuario/{nomeUsuario}")
-	public ResponseEntity<List<UserModel>> GetByName(@PathVariable(value = "nomeUsuario") @RequestBody String nomeUsuario) {
-		return ResponseEntity.ok(repository.findAllByNomeUsuarioContainingIgnoreCase(nomeUsuario));
-	}
-	
-		
-	@PostMapping
-	public ResponseEntity<UserModel> post (@Valid @RequestBody UserModel newuser){
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(newuser));
-	}
-	
-	@PutMapping
-	public ResponseEntity<UserModel> put (@Valid @RequestBody UserModel edituser){
-		return ResponseEntity.status (HttpStatus.OK).body(repository.save(edituser));
-	}
-	
-	@DeleteMapping("/{idUsuario}")
-	public void delete (@PathVariable Long idUsuario) {
-		repository.deleteById(idUsuario);
-	}
 
-	public UserRepository getRepository() {
-		return repository;
-	}
+	private @Autowired UserServices services;
 
+    @PostMapping
+    public ResponseEntity<UserModel> save(@Valid @RequestBody UserRegisterDTO newUser){
+    	return services.registerUser(newUser);
+    }
+    
+    @PutMapping("/credentials")
+    public ResponseEntity<UserCredentialsDTO> credentials(@Valid @RequestBody UserLoginDTO user){
+    	return services.getCredentials(user);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getProfile(@RequestHeader("Authorization") String auth){
+        return ResponseEntity.status(200).body(repository.findByToken(auth.replace("Basic ","")));
+    }
+    
 
 }
