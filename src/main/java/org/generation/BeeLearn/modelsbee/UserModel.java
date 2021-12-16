@@ -45,6 +45,15 @@ public class UserModel {
 	private Long nivel;
 	private Long xp;
 	private String token;
+	private String tokenBasic;
+
+	public String getTokenBasic() {
+		return tokenBasic;
+	}
+
+	public void setTokenBasic(String tokenBasic) {
+		this.tokenBasic = tokenBasic;
+	}
 
 	public String getToken() {
 		return token;

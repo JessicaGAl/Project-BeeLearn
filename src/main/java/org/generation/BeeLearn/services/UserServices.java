@@ -55,6 +55,7 @@ public class UserServices {
 			user.setNomeUsuario(newUser.getNomeUsuario());
 			user.setEmail(newUser.getEmail());
 			user.setToken(generatorToken(newUser.getEmail(), newUser.getSenha()));
+			user.setTokenBasic(generatorTokenBasic(newUser.getEmail(), newUser.getSenha()));
 			user.setSenha(criptoPassword(newUser.getSenha()));
 			return ResponseEntity.status(201).body(repository.save(user));
 		}
