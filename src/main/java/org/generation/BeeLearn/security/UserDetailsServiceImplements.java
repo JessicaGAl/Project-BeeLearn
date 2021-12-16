@@ -5,10 +5,13 @@ import java.util.Optional;
 import org.generation.BeeLearn.modelsbee.UserModel;
 import org.generation.BeeLearn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImplements {
+public class UserDetailsServiceImplements implements UserDetailsService{
 	private @Autowired UserRepository repository;
 
 	@Override

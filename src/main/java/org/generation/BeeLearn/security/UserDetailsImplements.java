@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import org.generation.BeeLearn.models.UserModel;
+import org.generation.BeeLearn.modelsbee.UserModel;
 
 public class UserDetailsImplements implements UserDetails{
 
@@ -18,7 +18,7 @@ public class UserDetailsImplements implements UserDetails{
 
 	public UserDetailsImplements(UserModel userData) {
 		this.email = userData.getEmail();
-		this.password = userData.getPassword();
+		this.password = userData.getSenha();
 	}
 
 	@Override

@@ -1,16 +1,20 @@
 package org.generation.BeeLearn.services;
 
 import java.nio.charset.Charset;
-import java.util.Base64;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.apache.commons.codec.binary.Base64;
 import org.generation.BeeLearn.modelsbee.UserModel;
+import org.generation.BeeLearn.modelsbee.dtos.UserCredentialsDTO;
+import org.generation.BeeLearn.modelsbee.dtos.UserLoginDTO;
+import org.generation.BeeLearn.modelsbee.dtos.UserRegisterDTO;
 import org.generation.BeeLearn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -48,10 +52,10 @@ public class UserServices {
 					"Este email já se encontra cadastrado, favor realizar o login");
 		} else {
 			UserModel user = new UserModel();
-			user.setName(newUser.getName());
+			user.setNomeUsuario(newUser.getNomeUsuario());
 			user.setEmail(newUser.getEmail());
-			user.setToken(generatorToken(newUser.getEmail(), newUser.getPassword()));
-			user.setPassword(criptoPassword(newUser.getPassword()));
+			user.setToken(generatorToken(newUser.getEmail(), newUser.getSenha()));
+			user.setSenha(criptoPassword(newUser.getSenha()));
 			return ResponseEntity.status(201).body(repository.save(user));
 		}
 	}
@@ -60,13 +64,13 @@ public class UserServices {
 		return repository.findByEmail(userDto.getEmail()).map(resp -> {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-			if (encoder.matches(userDto.getPassword(), resp.getPassword())) {
+			if (encoder.matches(userDto.getSenha(), resp.getSenha())) {
 
 				credentials = new UserCredentialsDTO();
-				credentials.setIdUser(resp.getIdUser());
+				credentials.setId(resp.getIdUsuario());
 				credentials.setEmail(resp.getEmail());
 				credentials.setToken(resp.getToken());
-				credentials.setTokenBasic(generatorTokenBasic(userDto.getEmail(), userDto.getPassword()));
+				credentials.setTokenBasic(generatorTokenBasic(userDto.getEmail(), userDto.getSenha()));
 
 				return ResponseEntity.status(200).body(credentials);
 			} else {

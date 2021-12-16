@@ -4,7 +4,11 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.generation.BeeLearn.modelsbee.UserModel;
+import org.generation.BeeLearn.modelsbee.dtos.UserCredentialsDTO;
+import org.generation.BeeLearn.modelsbee.dtos.UserLoginDTO;
+import org.generation.BeeLearn.modelsbee.dtos.UserRegisterDTO;
 import org.generation.BeeLearn.repository.UserRepository;
+import org.generation.BeeLearn.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 	private @Autowired UserServices services;
+	private @Autowired UserRepository repository;
 
     @PostMapping
     public ResponseEntity<UserModel> save(@Valid @RequestBody UserRegisterDTO newUser){
@@ -35,7 +41,7 @@ public class UserController {
     	return services.getCredentials(user);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<?> getProfile(@RequestHeader("Authorization") String auth){
         return ResponseEntity.status(200).body(repository.findByToken(auth.replace("Basic ","")));
     }
