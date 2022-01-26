@@ -46,6 +46,14 @@ public class UserModel {
 	private Long xp;
 	private String token;
 	private String tokenBasic;
+	private String foto;
+	private String tipo;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("UserModels")
+	private List<PostagensModel> postagem;
+	
+	
 
 	public String getTokenBasic() {
 		return tokenBasic;
@@ -62,10 +70,6 @@ public class UserModel {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("UserModels")
-	private List<UserModel> user = new ArrayList<>();
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -131,12 +135,30 @@ public class UserModel {
 		this.xp = xp;
 	}
 
-	public List<UserModel> getUser() {
-		return user;
+	public String getFoto() {
+		return foto;
 	}
 
-	public void setUser(List<UserModel> user) {
-		this.user = user;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public List<PostagensModel> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<PostagensModel> postagem) {
+		this.postagem = postagem;
+	}
+	
+	
 
 }

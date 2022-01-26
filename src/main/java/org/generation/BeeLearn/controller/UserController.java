@@ -3,12 +3,13 @@ package org.generation.BeeLearn.controller;
 import java.util.List;
 import javax.validation.Valid;
 
+import org.generation.BeeLearn.modelsbee.UserLogin;
 import org.generation.BeeLearn.modelsbee.UserModel;
 import org.generation.BeeLearn.modelsbee.dtos.UserCredentialsDTO;
 import org.generation.BeeLearn.modelsbee.dtos.UserLoginDTO;
 import org.generation.BeeLearn.modelsbee.dtos.UserRegisterDTO;
 import org.generation.BeeLearn.repository.UserRepository;
-import org.generation.BeeLearn.services.UserServices;
+import org.generation.BeeLearn.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,16 +29,16 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(allowedHeaders = "*", origins = "*")
 public class UserController {
 
-	private @Autowired UserServices services;
+	private @Autowired UserService services;
 	private @Autowired UserRepository repository;
 
     @PostMapping
-    public ResponseEntity<UserModel> save(@Valid @RequestBody UserRegisterDTO newUser){
+    public ResponseEntity<UserModel> save(@Valid @RequestBody UserModel newUser){
     	return services.registerUser(newUser);
     }
     
     @PutMapping("/credentials")
-    public ResponseEntity<UserCredentialsDTO> credentials(@Valid @RequestBody UserLoginDTO user){
+    public ResponseEntity<UserLogin> credentials(@Valid @RequestBody UserLogin user){
     	return services.getCredentials(user);
     }
 

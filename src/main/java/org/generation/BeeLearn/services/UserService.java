@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Base64;
+import org.generation.BeeLearn.modelsbee.UserLogin;
 import org.generation.BeeLearn.modelsbee.UserModel;
 import org.generation.BeeLearn.modelsbee.dtos.UserCredentialsDTO;
 import org.generation.BeeLearn.modelsbee.dtos.UserLoginDTO;
@@ -19,10 +20,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-public class UserServices {
+public class UserService {
 
 	private @Autowired UserRepository repository;
-	private UserCredentialsDTO credentials;
+	private UserLogin credentials;
 	private UserModel user;
 
 	private static String criptoPassword(String password) {
@@ -43,7 +44,7 @@ public class UserServices {
 
 	}
 
-	public ResponseEntity<UserModel> registerUser(@Valid UserRegisterDTO newUser) {
+	public ResponseEntity<UserModel> registerUser(@Valid UserModel newUser) {
 
 		Optional<UserModel> optional = repository.findByEmail(newUser.getEmail());
 
@@ -61,14 +62,14 @@ public class UserServices {
 		}
 	}
 
-	public ResponseEntity<UserCredentialsDTO> getCredentials(@Valid UserLoginDTO userDto) {
+	public ResponseEntity<UserLogin> getCredentials(@Valid UserLogin userDto) {
 		return repository.findByEmail(userDto.getEmail()).map(resp -> {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 			if (encoder.matches(userDto.getSenha(), resp.getSenha())) {
 
-				credentials = new UserCredentialsDTO();
-				credentials.setId(resp.getIdUsuario());
+				credentials = new UserLogin();
+				credentials.setIdUsuario(resp.getIdUsuario());
 				credentials.setEmail(resp.getEmail());
 				credentials.setToken(resp.getToken());
 				credentials.setTokenBasic(generatorTokenBasic(userDto.getEmail(), userDto.getSenha()));
