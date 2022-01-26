@@ -81,5 +81,34 @@ public class UserServices {
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email incorreto!"));
 
 	}
+	
+	public Optional<UserLoginDTO> Logar(Optional<UserLoginDTO> user){
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Optional<UserModel> usuario = repository.findByNomeUsuario(user.get().getNomeUsuario());
+		
+		if(usuario.isPresent()) {
+			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
+				
+				String auth = user.get().getNomeUsuario() + ":" + user.get().getSenha();
+				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+				String authHeader = "basic " + new String(encodedAuth);
+				
+				user.get().setToken(authHeader);
+				user.get().setId(usuario.get().getIdUsuario());
+				user.get().setNomeUsuario(usuario.get().getNomeUsuario());
+				user.get().setUrlAvatar(usuario.get().getUrlAvatar());
+				user.get().setNivel(usuario.get().getNivel());
+				user.get().setXp(usuario.get().getXp());
+				
+				
+				
+				return user;
+			}
+		}
+		return null;
+				
+		
+		
+	}
 
 }

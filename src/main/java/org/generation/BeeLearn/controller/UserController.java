@@ -1,6 +1,8 @@
 package org.generation.BeeLearn.controller;
 
-import java.util.List;
+
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.generation.BeeLearn.modelsbee.UserModel;
@@ -31,10 +33,15 @@ public class UserController {
 	private @Autowired UserServices services;
 	private @Autowired UserRepository repository;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<UserModel> save(@Valid @RequestBody UserRegisterDTO newUser){
     	return services.registerUser(newUser);
     }
+    
+    @DeleteMapping("delete/{idUsuario}")
+	public void delete(@PathVariable(value = "idUsuario") Long id) {
+		repository.deleteById(id);
+	}
     
     @PutMapping("/credentials")
     public ResponseEntity<UserCredentialsDTO> credentials(@Valid @RequestBody UserLoginDTO user){
@@ -45,6 +52,13 @@ public class UserController {
     public ResponseEntity<?> getProfile(@RequestHeader("Authorization") String auth){
         return ResponseEntity.status(200).body(repository.findByToken(auth.replace("Basic ","")));
     }
+    
+	@PostMapping("/logar") 
+	public ResponseEntity<UserLoginDTO> Autentication(@RequestBody Optional<UserLoginDTO> user){
+		return services.Logar(user).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+				
+	}
     
 
 }
