@@ -84,7 +84,7 @@ public class UserServices {
 	
 	public Optional<UserLoginDTO> Logar(Optional<UserLoginDTO> user){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<UserModel> usuario = repository.findByNomeUsuario(user.get().getNomeUsuario());
+		Optional<UserModel> usuario = repository.findByEmail(user.get().getEmail());
 		
 		if(usuario.isPresent()) {
 			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
