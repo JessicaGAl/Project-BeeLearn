@@ -61,6 +61,13 @@ public class UserController {
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 				
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<UserModel> getById(@PathVariable Long id) {
+		return repository.findById(id)
+			.map(resp -> ResponseEntity.ok(resp))
+			.orElse(ResponseEntity.notFound().build());
+	}
     
 
 }
