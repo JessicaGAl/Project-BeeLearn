@@ -24,7 +24,7 @@ public class UserService {
 
 	private @Autowired UserRepository repository;
 	private UserLogin credentials;
-	private UserModel user;
+	private  UserModel user;
 
 	private static String criptoPassword(String password) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -55,6 +55,10 @@ public class UserService {
 			UserModel user = new UserModel();
 			user.setNomeUsuario(newUser.getNomeUsuario());
 			user.setEmail(newUser.getEmail());
+			user.setBio(newUser.getBio());
+			user.setFoto(newUser.getFoto());
+			user.setTipo(newUser.getTipo());
+			user.setIdUsuario(newUser.getIdUsuario());
 			user.setToken(generatorToken(newUser.getEmail(), newUser.getSenha()));
 			user.setTokenBasic(generatorTokenBasic(newUser.getEmail(), newUser.getSenha()));
 			user.setSenha(criptoPassword(newUser.getSenha()));
@@ -71,6 +75,10 @@ public class UserService {
 				credentials = new UserLogin();
 				credentials.setIdUsuario(resp.getIdUsuario());
 				credentials.setEmail(resp.getEmail());
+				credentials.setBio(resp.getBio());
+				credentials.setFoto(resp.getFoto());
+				credentials.setNomeUsuario(resp.getNomeUsuario());
+				credentials.setTipo(resp.getTipo());
 				credentials.setToken(resp.getToken());
 				credentials.setTokenBasic(generatorTokenBasic(userDto.getEmail(), userDto.getSenha()));
 
@@ -95,12 +103,13 @@ public class UserService {
 				String authHeader = "basic " + new String(encodedAuth);
 				
 				user.get().setToken(authHeader);
-				user.get().setId(usuario.get().getIdUsuario());
+				user.get().setIdUsuario(usuario.get().getIdUsuario());
 				user.get().setNomeUsuario(usuario.get().getNomeUsuario());
-				user.get().setUrlAvatar(usuario.get().getUrlAvatar());
-				user.get().setNivel(usuario.get().getNivel());
-				user.get().setXp(usuario.get().getXp());
-				
+				user.get().setBio(usuario.get().getBio());
+				user.get().setEmail(usuario.get().getEmail());
+				user.get().setFoto(usuario.get().getFoto());
+				user.get().setTipo(usuario.get().getTipo());
+	
 				
 				
 				return user;
