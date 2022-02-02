@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class GrupoModels {
 
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idGrupo;
-	private @NotBlank String nomeGrupo;
+	private String nomeGrupo;
 	private @NotBlank String descricao;
 	private String urlImagem;
 	

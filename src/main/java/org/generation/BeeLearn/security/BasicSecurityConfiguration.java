@@ -35,8 +35,19 @@ public class BasicSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests().antMatchers("/**").permitAll()
-.antMatchers(HttpMethod.POST, "/api/v1/user").permitAll()
-				.antMatchers(HttpMethod.PUT, "/api/v1/user/credentials").permitAll().anyRequest().authenticated().and()
+		        .antMatchers(HttpMethod.POST, "/api/v1/user").permitAll()
+				.antMatchers(HttpMethod.PUT, "/api/v1/user/credentials").permitAll()
+				.antMatchers(HttpMethod.GET, "/grup").permitAll()
+                .antMatchers(HttpMethod.POST, "/grup").permitAll()
+                .antMatchers(HttpMethod.PUT, "/grup").permitAll()
+                .antMatchers(HttpMethod.GET, "/grup/{idGrupo}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/grup/{idGrupo}").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/postagem/all").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/postagem/save").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/postagem/update").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/postagem/{idPostagem}").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/v1/postagem/delete/{idPostagem}").permitAll()
+				.anyRequest().authenticated().and()
 				.httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.cors().and().csrf().disable();
 
