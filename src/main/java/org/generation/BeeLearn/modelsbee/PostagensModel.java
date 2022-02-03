@@ -33,10 +33,14 @@ public class PostagensModel {
 	@Size (max = 200)
 	private String postagem;
 	
+	
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private GrupoModels grupo;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private UserModel user;
 	
 	
 	
@@ -66,6 +70,26 @@ public class PostagensModel {
 
 	public void setPostagem(String postagem) {
 		this.postagem = postagem;
+	}
+
+	public GrupoModels getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(GrupoModels grupo) {
+		this.grupo = grupo;
+	}
+
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
+
+	public Long getIdPostagem() {
+		return idPostagem;
 	}
 
 

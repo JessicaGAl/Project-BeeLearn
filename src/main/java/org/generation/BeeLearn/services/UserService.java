@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.apache.commons.codec.binary.Base64;
+import org.generation.BeeLearn.modelsbee.UserLogin;
 import org.generation.BeeLearn.modelsbee.UserModel;
 import org.generation.BeeLearn.modelsbee.dtos.UserCredentialsDTO;
 import org.generation.BeeLearn.modelsbee.dtos.UserLoginDTO;
@@ -19,10 +20,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-public class UserServices {
+public class UserService {
 
 	private @Autowired UserRepository repository;
+<<<<<<< HEAD:src/main/java/org/generation/BeeLearn/services/UserServices.java
 	private UserCredentialsDTO credentials;
+=======
+	private UserLogin credentials;
+	private  UserModel user;
+>>>>>>> 92d1e7b80cad2728bdf74e8e5e1bbe297aae0a62:src/main/java/org/generation/BeeLearn/services/UserService.java
 
 	private static String criptoPassword(String password) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -53,6 +59,10 @@ public class UserServices {
 			UserModel user = new UserModel();
 			user.setNomeUsuario(newUser.getNomeUsuario());
 			user.setEmail(newUser.getEmail());
+			user.setBio(newUser.getBio());
+			user.setFoto(newUser.getFoto());
+			user.setTipo(newUser.getTipo());
+			user.setIdUsuario(newUser.getIdUsuario());
 			user.setToken(generatorToken(newUser.getEmail(), newUser.getSenha()));
 			user.setTokenBasic(generatorTokenBasic(newUser.getEmail(), newUser.getSenha()));
 			user.setSenha(criptoPassword(newUser.getSenha()));
@@ -60,15 +70,19 @@ public class UserServices {
 		}
 	}
 
-	public ResponseEntity<UserCredentialsDTO> getCredentials(@Valid UserLoginDTO userDto) {
+	public ResponseEntity<UserLogin> getCredentials(@Valid UserLogin userDto) {
 		return repository.findByEmail(userDto.getEmail()).map(resp -> {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 			if (encoder.matches(userDto.getSenha(), resp.getSenha())) {
 
-				credentials = new UserCredentialsDTO();
-				credentials.setId(resp.getIdUsuario());
+				credentials = new UserLogin();
+				credentials.setIdUsuario(resp.getIdUsuario());
 				credentials.setEmail(resp.getEmail());
+				credentials.setBio(resp.getBio());
+				credentials.setFoto(resp.getFoto());
+				credentials.setNomeUsuario(resp.getNomeUsuario());
+				credentials.setTipo(resp.getTipo());
 				credentials.setToken(resp.getToken());
 				credentials.setTokenBasic(generatorTokenBasic(userDto.getEmail(), userDto.getSenha()));
 
@@ -93,12 +107,13 @@ public class UserServices {
 				String authHeader = "basic " + new String(encodedAuth);
 				
 				user.get().setToken(authHeader);
-				user.get().setId(usuario.get().getIdUsuario());
+				user.get().setIdUsuario(usuario.get().getIdUsuario());
 				user.get().setNomeUsuario(usuario.get().getNomeUsuario());
-				user.get().setUrlAvatar(usuario.get().getUrlAvatar());
-				user.get().setNivel(usuario.get().getNivel());
-				user.get().setXp(usuario.get().getXp());
-				
+				user.get().setBio(usuario.get().getBio());
+				user.get().setEmail(usuario.get().getEmail());
+				user.get().setFoto(usuario.get().getFoto());
+				user.get().setTipo(usuario.get().getTipo());
+	
 				
 				
 				return user;
