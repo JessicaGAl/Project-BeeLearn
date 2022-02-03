@@ -29,13 +29,8 @@ public class PostagensController {
 
 	/** findAllPostagem */
 	@GetMapping("/all")
-	public ResponseEntity<List<PostagensModel>> getAll() {
-		List<PostagensModel> list = repository.findAll();
-		if (list.isEmpty()) {
-			return ResponseEntity.status(204).build();
-		} else {
-			return ResponseEntity.status(200).body(list);
-		}
+	public ResponseEntity<List<PostagensModel>> GetAll() {
+		return ResponseEntity.ok(repository.findAll());
 	}
 
 	/** postPostagem */
