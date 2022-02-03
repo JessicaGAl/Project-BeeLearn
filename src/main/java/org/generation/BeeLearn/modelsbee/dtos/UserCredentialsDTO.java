@@ -15,8 +15,8 @@ public class UserCredentialsDTO {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(Long id) {
-		this.idUsuario = id;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getEmail() {
