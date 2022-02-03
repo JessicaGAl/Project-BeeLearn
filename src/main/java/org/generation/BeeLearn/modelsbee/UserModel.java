@@ -51,7 +51,7 @@ public class UserModel {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("UserModels")
-	private List<PostagensModel> postagem;
+	private List<GrupoModels> grupo = new ArrayList<>();
 	
 	
 
@@ -151,14 +151,14 @@ public class UserModel {
 		this.tipo = tipo;
 	}
 
-	public List<PostagensModel> getPostagem() {
-		return postagem;
+	public List<GrupoModels> getGrupo() {
+		return grupo;
 	}
 
-	public void setPostagem(List<PostagensModel> postagem) {
-		this.postagem = postagem;
+	public void setGrupo(List<GrupoModels> grupo) {
+		this.grupo = grupo;
 	}
-	
+
 	
 
 }
