@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
@@ -30,14 +29,26 @@ public class GrupoModels {
 	private @NotBlank String descricao;
 	private String urlImagem;
 	
-		
-	@OneToMany(cascade = CascadeType.REMOVE,mappedBy = "grupo")
-	@JsonIgnoreProperties ("grupo")
-	private List<PostagensModel> postagem;
+	
+
+	@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("GrupoModels")
+	private List<PostagensModel> postagem = new ArrayList<>();
+
 	
 	@ManyToOne
-	@JsonIgnoreProperties("user")
+	@JsonIgnoreProperties("GrupoModels")
+	@JoinColumn(name = "idUsuario")
 	private UserModel user;
+
+
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
 
 	public Long getIdGrupo() {
 		return idGrupo;
@@ -70,7 +81,8 @@ public class GrupoModels {
 	public void setUrlImagem(String urlImagem) {
 		this.urlImagem = urlImagem;
 	}
-
+	
+	
 	public List<PostagensModel> getPostagem() {
 		return postagem;
 	}
@@ -78,16 +90,8 @@ public class GrupoModels {
 	public void setPostagem(List<PostagensModel> postagem) {
 		this.postagem = postagem;
 	}
-
-	public UserModel getUsuario() {
-		return user;
-	}
-
-	public void setUsuario(UserModel usuario) {
-		this.user = usuario;
-	}
-
-
+	
+	
 	
 
 }

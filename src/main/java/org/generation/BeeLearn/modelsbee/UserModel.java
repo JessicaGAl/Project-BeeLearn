@@ -14,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -48,13 +49,27 @@ public class UserModel {
 	private String foto;
 	private String tipo;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("UserModel")
-	private List<PostagensModel> postagem = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("UserModel")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("UserModels")
 	private List<GrupoModels> grupo = new ArrayList<>();
+	
+	
+
+	public String getTokenBasic() {
+		return tokenBasic;
+	}
+
+	public void setTokenBasic(String tokenBasic) {
+		this.tokenBasic = tokenBasic;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -120,22 +135,6 @@ public class UserModel {
 		this.xp = xp;
 	}
 
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public String getTokenBasic() {
-		return tokenBasic;
-	}
-
-	public void setTokenBasic(String tokenBasic) {
-		this.tokenBasic = tokenBasic;
-	}
-
 	public String getFoto() {
 		return foto;
 	}
@@ -152,14 +151,6 @@ public class UserModel {
 		this.tipo = tipo;
 	}
 
-	public List<PostagensModel> getPostagem() {
-		return postagem;
-	}
-
-	public void setPostagem(List<PostagensModel> postagem) {
-		this.postagem = postagem;
-	}
-
 	public List<GrupoModels> getGrupo() {
 		return grupo;
 	}
@@ -167,10 +158,7 @@ public class UserModel {
 	public void setGrupo(List<GrupoModels> grupo) {
 		this.grupo = grupo;
 	}
-	
 
-	
-	
 	
 
 }
