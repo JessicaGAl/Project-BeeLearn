@@ -23,12 +23,9 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserService {
 
 	private @Autowired UserRepository repository;
-<<<<<<< HEAD:src/main/java/org/generation/BeeLearn/services/UserServices.java
-	private UserCredentialsDTO credentials;
-=======
+
 	private UserLogin credentials;
 	private  UserModel user;
->>>>>>> 92d1e7b80cad2728bdf74e8e5e1bbe297aae0a62:src/main/java/org/generation/BeeLearn/services/UserService.java
 
 	private static String criptoPassword(String password) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
