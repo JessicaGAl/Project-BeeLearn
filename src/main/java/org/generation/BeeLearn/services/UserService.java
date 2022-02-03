@@ -24,8 +24,9 @@ public class UserService {
 
 	private @Autowired UserRepository repository;
 
-	private UserLogin credentials;
-	private  UserModel user;
+	private UserCredentialsDTO credentials;
+	private UserModel user;
+
 
 	private static String criptoPassword(String password) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -67,13 +68,13 @@ public class UserService {
 		}
 	}
 
-	public ResponseEntity<UserLogin> getCredentials(@Valid UserLogin userDto) {
+	public ResponseEntity<UserCredentialsDTO> getCredentials(@Valid UserLoginDTO userDto) {
 		return repository.findByEmail(userDto.getEmail()).map(resp -> {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 			if (encoder.matches(userDto.getSenha(), resp.getSenha())) {
 
-				credentials = new UserLogin();
+				credentials = new UserCredentialsDTO();
 				credentials.setIdUsuario(resp.getIdUsuario());
 				credentials.setEmail(resp.getEmail());
 				credentials.setBio(resp.getBio());

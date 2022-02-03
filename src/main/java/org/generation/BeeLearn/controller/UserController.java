@@ -46,7 +46,7 @@ public class UserController {
 	}
     
     @PutMapping("/credentials")
-    public ResponseEntity<UserLogin> credentials(@Valid @RequestBody UserLogin user){
+    public ResponseEntity<UserCredentialsDTO> credentials(@Valid @RequestBody UserLoginDTO user){
     	return services.getCredentials(user);
     }
 
