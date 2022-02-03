@@ -2,17 +2,21 @@ package org.generation.BeeLearn.modelsbee.dtos;
 
 public class UserCredentialsDTO {
 
-	private Long id;
+	private Long idUsuario;
 	private String email;
 	private String token;
 	private String tokenBasic;
+	private String bio;
+	private String foto;
+	private String nomeUsuario;
+	private String tipo;
 
-	public Long getId() {
-		return id;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getEmail() {
@@ -38,5 +42,38 @@ public class UserCredentialsDTO {
 	public void setTokenBasic(String tokenBasic) {
 		this.tokenBasic = tokenBasic;
 	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 
 }

@@ -21,6 +21,9 @@ public class UserLoginDTO {
 	private String tokenBasic;
 	private String foto;
 	private String tipo;
+	private Long nivel;
+	private Long xp;
+	private String urlAvatar;
 
 	public String getNomeUsuario() {
 		return nomeUsuario;
@@ -92,6 +95,30 @@ public class UserLoginDTO {
 
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	public Long getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(Long nivel) {
+		this.nivel = nivel;
+	}
+
+	public Long getXp() {
+		return xp;
+	}
+
+	public void setXp(Long xp) {
+		this.xp = xp;
+	}
+
+	public String getUrlAvatar() {
+		return urlAvatar;
+	}
+
+	public void setUrlAvatar(String urlAvatar) {
+		this.urlAvatar = urlAvatar;
 	}
 	
 	
