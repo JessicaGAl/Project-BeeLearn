@@ -28,6 +28,7 @@ public class GrupoModels {
 	private String nomeGrupo;
 	private @NotBlank String descricao;
 	private String urlImagem;
+	private Long user;
 	
 	
 
@@ -36,17 +37,16 @@ public class GrupoModels {
 	private List<PostagensModel> postagem = new ArrayList<>();
 
 	
-	@ManyToOne
-	@JsonIgnoreProperties("GrupoModels")
-	@JoinColumn(name = "idUsuario")
-	private UserModel user;
+	
 
 
-	public UserModel getUser() {
+	
+
+	public Long getUser() {
 		return user;
 	}
 
-	public void setUser(UserModel user) {
+	public void setUser(Long user) {
 		this.user = user;
 	}
 
