@@ -10,13 +10,7 @@ import javax.validation.constraints.Size;
 public class UserRegisterDTO {
 	
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idUsuario;
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 
 	private @NotBlank @Size(min = 3, max = 50) String nomeUsuario;
 	private @NotBlank @Email String email;
@@ -90,6 +84,14 @@ public class UserRegisterDTO {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
 	
 	
 

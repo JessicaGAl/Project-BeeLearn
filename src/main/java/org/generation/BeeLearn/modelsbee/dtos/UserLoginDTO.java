@@ -9,10 +9,7 @@ import javax.validation.constraints.Size;
 
 public class UserLoginDTO {
 	
-	private Long idUsuario;
-	
-	
-
+	private long idUsuario;
 	private String nomeUsuario;
 	private String email;
 	private String senha;
@@ -89,11 +86,11 @@ public class UserLoginDTO {
 		this.tipo = tipo;
 	}
 
-	public Long getIdUsuario() {
+	public long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
+	public void setIdUsuario(long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

@@ -30,7 +30,7 @@ public class GrupoController {
 	private GrupoRepository repository;
 
 	
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<GrupoModels>> GetAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}

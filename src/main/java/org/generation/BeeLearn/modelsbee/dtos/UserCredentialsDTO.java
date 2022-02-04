@@ -2,7 +2,7 @@ package org.generation.BeeLearn.modelsbee.dtos;
 
 public class UserCredentialsDTO {
 
-	private Long idUsuario;
+	private long idUsuario;
 	private String email;
 	private String token;
 	private String tokenBasic;
@@ -11,11 +11,11 @@ public class UserCredentialsDTO {
 	private String nomeUsuario;
 	private String tipo;
 
-	public Long getIdUsuario() {
+	public long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
+	public void setIdUsuario(long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
