@@ -27,6 +27,9 @@ public class Usuario {
 	@Size(min = 5, max = 100)
 	private String nome;
 
+	@Size(max = 100)
+	private String bio;
+
 	@NotBlank
 	@Email
 	private String email;
@@ -97,6 +100,14 @@ public class Usuario {
 
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 
 }
