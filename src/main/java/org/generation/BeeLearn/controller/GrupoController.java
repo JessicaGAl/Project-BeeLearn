@@ -2,10 +2,7 @@ package org.generation.BeeLearn.controller;
 
 import java.util.List;
 
-
-import javax.validation.Valid;
-
-import org.generation.BeeLearn.modelsbee.GrupoModels;
+import org.generation.BeeLearn.modelsbee.Grupo;
 import org.generation.BeeLearn.repository.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,44 +18,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*" )
-@RequestMapping("/grup")
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/grupo")
 public class GrupoController {
-
+	
 	@Autowired
 	private GrupoRepository repository;
-
 	
-	@GetMapping("/all")
-	public ResponseEntity<List<GrupoModels>> GetAll() {
+	@GetMapping
+	public ResponseEntity<List<Grupo>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
-
+	
 	@GetMapping("/{idGrupo}")
-	ResponseEntity<GrupoModels> GetById(@PathVariable Long idGrupo) {
+	public ResponseEntity<Grupo> getById(@PathVariable long idGrupo){
 		return repository.findById(idGrupo).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
-
-	@GetMapping("/nomeGrupo/{nomeGrupo}")
-	public ResponseEntity<List<GrupoModels>> GetByName(@PathVariable(value = "nomeGrupo") String nomeGrupo) {
+	
+	@GetMapping("/nome/{nomeGrupo}")
+	public ResponseEntity<List<Grupo>> getByName(@PathVariable String nomeGrupo){
 		return ResponseEntity.ok(repository.findAllByNomeGrupoContainingIgnoreCase(nomeGrupo));
 	}
-
+	
 	@PostMapping
-	public ResponseEntity<GrupoModels> post(@Valid @RequestBody GrupoModels nomeGrupoModels) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(nomeGrupoModels));
+	public ResponseEntity<Grupo> post (@RequestBody Grupo grupo){
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(repository.save(grupo));
 	}
 
 	@PutMapping
-	public ResponseEntity<GrupoModels> put(@Valid @RequestBody GrupoModels nomeGrupoModels) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(nomeGrupoModels));
+	public ResponseEntity<Grupo> put (@RequestBody Grupo grupo){
+		return ResponseEntity.ok(repository.save(grupo));				
 	}
-
+	
 	@DeleteMapping("/{idGrupo}")
-	public void delete(@PathVariable Long idGrupo) {
+	public void delete(@PathVariable long idGrupo) {
 		repository.deleteById(idGrupo);
 	}
-
+	
 }

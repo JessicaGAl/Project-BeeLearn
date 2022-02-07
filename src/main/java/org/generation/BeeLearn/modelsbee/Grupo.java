@@ -1,9 +1,5 @@
 package org.generation.BeeLearn.modelsbee;
 
-
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,50 +7,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
-@Table(name = "tbl_grupos")
-public class GrupoModels {
+@Table(name = "tb_grupo")
+public class Grupo {
 
-	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long idGrupo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idGrupo;
+
+	@NotBlank
+	@Size(max = 50)
 	private String nomeGrupo;
-	private @NotBlank String descricao;
+
+	@Size(max = 100)
+	private String descricao;
+
 	private String urlImagem;
-	private Long user;
-	
-	
 
-	@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("GrupoModels")
-	private List<PostagensModel> postagem = new ArrayList<>();
+	@OneToMany(mappedBy = "grupo", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("grupo")
+	private List<Postagem> postagem;
 
-	
-	
-
-
-	
-
-	public Long getUser() {
-		return user;
-	}
-
-	public void setUser(Long user) {
-		this.user = user;
-	}
-
-	public Long getIdGrupo() {
+	public long getIdGrupo() {
 		return idGrupo;
 	}
 
-	public void setIdGrupo(Long idGrupo) {
+	public void setIdGrupo(long idGrupo) {
 		this.idGrupo = idGrupo;
 	}
 
@@ -81,17 +65,13 @@ public class GrupoModels {
 	public void setUrlImagem(String urlImagem) {
 		this.urlImagem = urlImagem;
 	}
-	
-	
-	public List<PostagensModel> getPostagem() {
+
+	public List<Postagem> getPostagem() {
 		return postagem;
 	}
 
-	public void setPostagem(List<PostagensModel> postagem) {
+	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
-	
-	
 
 }
